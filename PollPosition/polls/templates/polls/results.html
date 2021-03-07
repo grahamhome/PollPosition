@@ -1,13 +1,11 @@
 {% extends "polls/base_page.html" %}
-{% block title %}{{ question.id }}{% endblock %}
+{% block title %}{{ question.id }} Results{% endblock %}
 {% block content %}
     <h1>{{ question.question_text }}</h1>
     {% if question.choice_set.all %}
-        <ul>
-            {% for choice in question.choice_set.all %}
-                <li>{{ choice.choice_text }}</li>
-            {% endfor %}
-        </ul>
+    {% for choice in question.choice_set.all %}
+        {{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}<br>
+    {% endfor %}
     {% else %}
         <p>No choices are available.</p>
     {% endif %}
